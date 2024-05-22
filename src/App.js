@@ -3,21 +3,27 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Toon Quiz">
+
+      <div className='Title'>
+        <h1>Title component here</h1>
+      </div>
+      <div>Button to View Rules</div>
+      <div>Button to configure game options</div>
+      <div>Button to start game</div>
+
+      <br></br>
+      <div>Trenob7641, CartoonQuizApp</div>
+      <br></br>
+
+      <div  className='GameImages'>
+        <div>Image One</div>
+        <div>Image Two</div>
+      </div>
+
+      <div>User selection</div>
+      <div>Next Question Button</div>
+
     </div>
   );
 }
