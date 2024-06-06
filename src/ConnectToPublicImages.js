@@ -20,9 +20,7 @@ const Image = ({ Network, Show }) => {
         {
             Network: 'CartoonNetwork',
             Show: 'PowerPuffGirls',
-            //Image before SVG
             ImageSource: publicUrlforCartoonNetwork + '/PowerpuffGirls.png'
-            //ImageSource: publicUrlforCartoonNetwork + '/PowerpuffGirls2.svg'
         },
         {
             Network: 'CartoonNetwork',
@@ -41,9 +39,7 @@ const Image = ({ Network, Show }) => {
         {
             Network: 'Disney',
             Show: 'DannyPhantom',
-            //Image before SVG
             ImageSource: publicUrlforDisney + '/DannyPhantom.png'
-            //ImageSource: publicUrlforDisney + '/DannyPhantom2.svg'
         },
         {
             Network: 'Disney',
@@ -62,9 +58,7 @@ const Image = ({ Network, Show }) => {
         {
             Network: 'Nickelodeon',
             Show: 'FairyOddParents',
-            //Image before SVG
             ImageSource: publicUrlforNickelodeon + '/FairyOddParents.png'
-            //ImageSource: publicUrlforNickelodeon + '/FairyOddParents2.svg'
         },
         {
             Network: 'Nickelodeon',

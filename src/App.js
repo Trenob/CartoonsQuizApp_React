@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Button from './Button';
 import Input from './Input';
 import QuestionCard from './QuestionCard';
-import BarChart from './BarChart'
 import './App.css';
 
 
@@ -88,9 +87,6 @@ function App() {
         <QuestionCard Network={'CartoonNetwork'} Show={'FostersHome'} />
       </section>
       <Button id='8' textToDisplay={'Submit Quiz!'} />
-
-      {/* <BarChart data={[12, 5, 6, 6, 9, 10]} width={700} height={300}/> */}
-      
     </div>
   );
 }
