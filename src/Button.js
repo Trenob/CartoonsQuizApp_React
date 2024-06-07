@@ -3,20 +3,15 @@ import { globals } from './Global';
 import Input from './Input';
 import './App.css';
 
-//Mouse events: 
-//onClick onContextMenu onDoubleClick onDrag onDragEnd onDragEnter onDragExit
-// onDragLeave onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeave
-// onMouseMove onMouseOut onMouseOver onMouseUp
-
 const Button = ({ id, textToDisplay }) => {
 
     var [bgColor, setBackgroundColor] = useState('darkkhaki');
     var [isClicked, setIsClicked] = useState(false);
 
-    //Default values for a game.
-    const [defaultGameVals, setGameValues] = useState({
-        playerMode: 1, timeLimit: 30, quizQuestions: 10
-    });
+    //Values for game options
+    var gameVal_playerMode = 1;
+    var gameVal_timeLimit = 30;
+    var gameVal_quizQuestions = 10;
 
     //Controls button highlight enter
     const handleMouseEnter = (e) => {
@@ -45,37 +40,72 @@ const Button = ({ id, textToDisplay }) => {
 
     //Hides and unhides the game option configurations
     const toggleOptionsOnAndOff = () => {
-        if (globals.gameIsActive == false) {
+        if (globals.gameIsActive === false) {
 
-            if (document.querySelector("#root > div > section.GameConfigurations").style.display == "none") {
+            if (document.querySelector("#root > div > section.GameConfigurations").style.display === "none") {
                 document.querySelector("#root > div > section.GameConfigurations").style.display = "block";
             }
             else {
                 document.querySelector("#root > div > section.GameConfigurations").style.display = "none";
             }
         }
-        else if (globals.gameIsActive == true) {
+        else if (globals.gameIsActive === true) {
             alert("Please quit or finish your game to configure the next game's options!")
         }
     }
+
+    //updates the game values
+    // const update
 
     //starts the game!
     const startGame = (e) => {
         //1st: set game to active (this should hide the config settings too)
 
-
         //2nd: set game to active
+    }
+
+    function getGameValues() {
+
+        if (document.querySelector("#root > div > section.GameConfigurations").style.display === "none") {
+            //use default values
+            gameVal_playerMode = 1;
+            gameVal_timeLimit = 30;
+            gameVal_quizQuestions = 10;
+        }
+        else {
+            //quiz questions
+            gameVal_quizQuestions = document.querySelector("#questionNum").value;
+
+            //get player mode
+            if (document.querySelector("#\\33 ").isClicked === true) {
+                gameVal_playerMode = 1;
+            }
+            else if (document.querySelector("#\\34 ").isClicked === true) {
+                gameVal_playerMode = 2;
+            }
+
+            //get time limit per questions
+            if (document.querySelector("#\\35 ").style.backgroundColor === 'chartreuse') {
+                gameVal_timeLimit = 20;
+            }
+            else if (document.querySelector("#\\36 ").style.backgroundColor = 'chartreuse') {
+                gameVal_timeLimit = 30;
+            }
+            else if (document.querySelector("#\\37 ").style.backgroundColor = 'chartreuse') {
+                gameVal_timeLimit = 45;
+            }
+        }
     }
 
 
     function setPlayerNames(buttonsText) {
 
-        if (buttonsText == 'Single') {
+        if (buttonsText === 'Single') {
             //hide player two div
             document.querySelector("#playerTwo").style.display = 'none';
             //document.querySelector("#playerOne > p").innerHTML = 'Player One\'s Name:';
         }
-        else if (buttonsText == 'Versus') {
+        else if (buttonsText === 'Versus') {
             //show player two div
             document.querySelector("#playerTwo").style.display = '';
             //document.querySelector("#playerTwo > p").innerHTML = 'Player Two\'s Name:';
@@ -93,6 +123,8 @@ const Button = ({ id, textToDisplay }) => {
                 break;
 
             case 'Quick Start':
+                getGameValues();
+
                 //change global variable to true to disable opening config options after game has begun
                 globals.gameIsActive = true;
 
@@ -101,23 +133,14 @@ const Button = ({ id, textToDisplay }) => {
 
                 document.querySelector("#root > div > section.QuizQuestionContainer").style.display = "block";
 
-                //get quiz questions # from input
-                defaultGameVals.quizQuestions = document.querySelector("#questionNum").value;
-
                 // start the game
-                startGame(defaultGameVals)
+                startGame(gameVal_playerMode, gameVal_timeLimit, gameVal_quizQuestions);
                 break;
 
             case 'Single':
 
                 //show player one div
                 setPlayerNames(buttonsText);
-
-                setGameValues(
-                    1,
-                    (defaultGameVals.timeLimit == null) ? '' : defaultGameVals.timeLimit,
-                    (defaultGameVals.quizQuestions == null) ? '' : defaultGameVals.quizQuestions
-                );
 
                 if (!e.target.isClicked) {
                     //set this button to green indicating to user it is clicked
@@ -129,8 +152,6 @@ const Button = ({ id, textToDisplay }) => {
                     //set Versus button to not clicked and change color back
                     document.querySelector("#\\34 ").isClicked = false;
                     document.querySelector("#\\34 ").style.backgroundColor = 'darkkhaki';
-
-
                 }
                 else if (e.target.isClicked) {
                     //button is already clicked, so change back to false and change color back
@@ -149,12 +170,6 @@ const Button = ({ id, textToDisplay }) => {
                 //show player one div
                 setPlayerNames(buttonsText);
 
-                setGameValues(
-                    2,
-                    (defaultGameVals.timeLimit == null) ? '' : defaultGameVals.timeLimit,
-                    (defaultGameVals.quizQuestions == null) ? '' : defaultGameVals.quizQuestions
-                );
-
                 if (!e.target.isClicked) {
                     //set this button to green indicating to user it is clicked
                     document.querySelector("#\\34 ").style.backgroundColor = 'chartreuse';
@@ -165,7 +180,6 @@ const Button = ({ id, textToDisplay }) => {
                     //set Versus button to not clicked and change color back
                     document.querySelector("#\\33 ").isClicked = false;
                     document.querySelector("#\\33 ").style.backgroundColor = 'darkkhaki';
-
                 }
                 else if (e.target.isClicked) {
                     //button is already clicked, so change back to false and change color back
@@ -180,15 +194,8 @@ const Button = ({ id, textToDisplay }) => {
                 break;
 
             case '20':
-                //Set game values for 20
-
-                setGameValues(
-                    (defaultGameVals.playerMode == null) ? '' : defaultGameVals.playerMode,
-                    20,
-                    (defaultGameVals.quizQuestions == null) ? '' : defaultGameVals.quizQuestions);
                 document.querySelector("#\\35 ").isClicked = true;
                 document.querySelector("#\\35 ").style.backgroundColor = 'chartreuse';
-
 
                 //turn other button selections off
                 document.querySelector("#\\36 ").isClicked = false;
@@ -199,15 +206,8 @@ const Button = ({ id, textToDisplay }) => {
                 break;
 
             case '30':
-                //Set game values for 30
-
-                setGameValues(
-                    (defaultGameVals.playerMode == null) ? '' : defaultGameVals.playerMode,
-                    30,
-                    (defaultGameVals.quizQuestions == null) ? '' : defaultGameVals.quizQuestions);
                 document.querySelector("#\\36 ").isClicked = true;
                 document.querySelector("#\\36 ").style.backgroundColor = 'chartreuse';
-
 
                 //turn other button selections off
                 document.querySelector("#\\35 ").isClicked = false;
@@ -217,15 +217,8 @@ const Button = ({ id, textToDisplay }) => {
                 break;
 
             case '45':
-                //Set game values for 45
-
-                setGameValues(
-                    (defaultGameVals.playerMode == null) ? '' : defaultGameVals.playerMode,
-                    45,
-                    (defaultGameVals.quizQuestions == null) ? '' : defaultGameVals.quizQuestions);
                 document.querySelector("#\\37 ").isClicked = true;
                 document.querySelector("#\\37 ").style.backgroundColor = 'chartreuse';
-
 
                 //turn other button selections off
                 document.querySelector("#\\35 ").isClicked = false;
