@@ -3,12 +3,37 @@ import React, { useState } from 'react';
 import Button from './Button';
 import Input from './Input';
 import QuestionCard from './QuestionCard';
+import Timer from './Timer';
 import './App.css';
+import { globals } from './Global';
+import GameContinaer from './GameContainer';
 
 
 
 //Program Start
 function App() {
+  const [startTheGame, setStartTheGame] = useState(false);
+
+  //starts the game timer
+  const startTimer = () => {
+    setStartTheGame(true);
+  }
+
+  //user may submit the quiz at anytime. stopping the game
+  const stopTimer = () => {
+    setStartTheGame(false);
+  }
+
+  //resets the quiz
+  const resetQuiz = () => {
+    alert('Quiz has been reset');
+  }
+
+  //final results
+  function scoreQuizDisplayResults() {
+    alert('The Game has finished!\nYour score is: ##');
+  }
+
   return (
     <div className="Toon Quiz">
 
@@ -32,7 +57,7 @@ function App() {
         <Button id={1} data-testid="1" className={'gameOptionButtons'} textToDisplay={'Configure game options'} />
 
         {/*start the game*/}
-        <Button id={2} data-testid="1" className={'gameOptionButtons'} textToDisplay={'Quick Start'} />
+        <Button id={2} data-testid="1" className={'gameOptionButtons'} textToDisplay={'Start Quiz'} startQuiz={startTimer} />
       </section>
 
 
@@ -41,7 +66,7 @@ function App() {
         Configure your game's options here. */}
 
         <div >
-          <div>Single or Versus mode:
+          <div>Single or Versus mode: <br />
             <Button id='3' data-testid='3' textToDisplay={'Single'} />
             <Button id='4' data-testid='4' textToDisplay={'Versus'} />
           </div>
@@ -49,10 +74,10 @@ function App() {
 
 
         <div >
-          <div>Time limit per Question:
-            <Button id='5' data-testid='5' textToDisplay={'20'} />
-            <Button id='6' data-testid='6' textToDisplay={'30'} />
-            <Button id='7' data-testid='7' textToDisplay={'45'} />
+          <div>Time limit for the Quiz: (seconds) <br />
+            <Button id='5' data-testid='5' textToDisplay={'30'} />
+            <Button id='6' data-testid='6' textToDisplay={'60'} />
+            <Button id='7' data-testid='7' textToDisplay={'90'} />
           </div>
         </div>
 
@@ -63,30 +88,33 @@ function App() {
           </div>
         </div>
 
-        <div>
+        {/* <div>
           <Input id='playerOne'/>
           <Input id='playerTwo' style={{display: 'none'}}/>
-        </div>
+        </div> */}
 
       </section>
 
       <section className='QuizQuestionContainer' style={{ display: "none" }}>
-        {/* Networks: CartoonNetwork  Disney  Nickelodeon */}
-
-        {/* Shows in CartoonNetwork: PowerPuffGirls    KND   FostersHome  */}
-        {/* Shows in Disney: DannyPhantom    LiloAndStitch     PhineasAndFerb  */}
-        {/* Shows in Nickelodeon: FairyOddParents    JimmyNeutron   SpongebobSquarepants  */}
-        <QuestionCard Network={'CartoonNetwork'} Show={'PowerPuffGirls'} />
-        <QuestionCard Network={'Disney'} Show={'DannyPhantom'} />
-        <QuestionCard Network={'Nickelodeon'} Show={'FairyOddParents'} />
-        <QuestionCard Network={'Disney'} Show={'LiloAndStitch'} />
-        <QuestionCard Network={'CartoonNetwork'} Show={'KND'} />
-        <QuestionCard Network={'Disney'} Show={'PhineasAndFerb'} />
-        <QuestionCard Network={'Nickelodeon'} Show={'JimmyNeutron'} />
-        <QuestionCard Network={'Nickelodeon'} Show={'SpongebobSquarepants'} />
-        <QuestionCard Network={'CartoonNetwork'} Show={'FostersHome'} />
+        <GameContinaer />
       </section>
-      <Button id='8' textToDisplay={'Submit Quiz!'} />
+
+      <section className='submissionAndTimerContainer' style={{ display: 'inline-flex' }}>
+        <div className='quizSubmission' style={{ display: 'none' }}>
+          <Button id='8' textToDisplay={'Submit Quiz!'} />
+        </div>
+
+        <div className='quizTimer' style={{ display: 'none' }}>
+          {/* Need startMins to look for the global time limit for it's time */}
+          {/* Need startSeconds to look for the global time limit for it's time */}
+          <Timer
+            startMins={0}
+            startSeconds={60}
+            whenTimerEnds={scoreQuizDisplayResults}
+            startTheGame={startTheGame} />
+        </div>
+      </section>
+
     </div>
   );
 }

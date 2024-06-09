@@ -13,8 +13,11 @@ Cartoon Network
 
     Codename Kids Next Door +
         The agent named Nigel Uno, what color shirt did he wear?
+            red
         What was the core mission of the KND?
+            fighting against adult and teenage tyranny
         Who was the greatest agent in the KND?
+            Numbuh 0
         What bodily material is needed for a child become a KND agent?
         WHo was #1's father?
     Courage the cowardly dog
@@ -100,7 +103,7 @@ Nickelodeon
     Phineas and Ferb
     Fairy Odd Parents +
         Who was Timmy's teacher?
-            Mr Crocker
+            Mr. Crocker
         Who was Wanda and Cosmos boss name?
             Jordan Bon Strangle
         What did Cosmo and Wanda transform into every night?

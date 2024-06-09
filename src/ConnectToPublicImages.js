@@ -95,7 +95,7 @@ const Image = ({ Network, Show }) => {
     //Return the image
     return (
         //Div returns an image if the form is found, if not found it returns image not found
-        <>{image ? <img src={image.ImageSource} alt={Show} style={{ width: '25%' }} /> : <p>Image not found</p>}</>
+        <>{image ? <img src={image.ImageSource} alt={Show}/> : <p>Image not found</p>}</>
     );
 };
 
